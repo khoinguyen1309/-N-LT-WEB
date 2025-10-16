@@ -1,0 +1,151 @@
+﻿@model List<TachLayout.Models.CartItemModel>
+@{
+    ViewBag.PageName = "Cart";
+}
+
+<div id="templatemo_main_wrapper">
+    <div id="templatemo_main">
+        <div id="sidebar" class="left">
+            <div class="sidebar_box">
+                <span class="bottom"></span>
+                <h3>Categories</h3>
+                <div class="content">
+                    <ul class="sidebar_list">
+                        <li><a href="#">Nulla odio ipsum</a></li>
+                        <li><a href="#">Suspendisse posuere</a></li>
+                        <li><a href="#">Aliquam euismod</a></li>
+                        <li><a href="#">Curabitur ac mauris</a></li>
+                        <li><a href="#">Mauris nulla tortor</a></li>
+                        <li><a href="#">Nullam ultrices</a></li>
+                        <li><a href="#">Vivamus scelerisque</a></li>
+                        <li><a href="#">Suspendisse posuere</a></li>
+                        <li><a href="#">Quisque vel justo</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar_box">
+                <span class="bottom"></span>
+                <h3>Weekly Special</h3>
+                <div class="content special">
+                    <img src="images/templatemo_image_01.jpg" alt="Flowers" />
+                    <a href="#">Citrus Burst Bouquet</a>
+                    <p>
+                        Price:
+                        <span class="price normal_price">$160</span>&nbsp;&nbsp;
+                        <span class="price special_price">$100</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="right">
+            <h2>Shopping Cart</h2>
+            <table width="700" border="0" cellpadding="5" cellspacing="0">
+                <tr bgcolor="#395015">
+                    <th width="168" align="left">Item</th>
+                    <th width="188" align="left">Description</th>
+                    <th width="100" align="center">Quantity</th>
+                    <th width="80" align="right">Price</th>
+                    <th width="80" align="right">Total</th>
+                    <th width="64"> </th>
+                </tr>
+
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            @{
+                                string imagePath = "~/images/product/default.jpg"; // Mặc định
+
+                                if (!string.IsNullOrEmpty(item.Hinh))
+                                {
+                                    if (item.Hinh.StartsWith("~/") || item.Hinh.StartsWith("/"))
+                                    {
+                                        // Nếu đường dẫn là tương đối trong web
+                                        imagePath = item.Hinh;
+                                    }
+                                    else
+                                    {
+                                        // Nếu chỉ là tên file, nối với folder web
+                                        imagePath = "~/images/product/" + item.Hinh;
+                                    }
+                                }
+                            }
+                            <td>
+                                <img src="@Url.Content(imagePath)" width="165" height="165"
+                                     onerror="this.onerror=null;this.src='@Url.Content("~/images/product/default.jpg")';" />
+                            </td>
+                            <td>@item.TenSP</td>
+                            <td align="center">
+                                <form method="post" action="@Url.Action("UpdateQuantity", "Cart")" style="display:inline;">
+                                    <input type="hidden" name="id" value="@item.MaSP" />
+                                    <button type="submit" name="change" value="-1" class="qty-btn">−</button>
+                                    <input type="text" name="quantity" value="@item.SoLuong" readonly style="width:40px; text-align:center;" />
+                                    <button type="submit" name="change" value="+1" class="qty-btn">+</button>
+                                </form>
+                            </td>
+                            <td align="right">@item.Gia.ToString("N0") ₫</td>
+                            <td align="right">@item.ThanhTien.ToString("N0") ₫</td>
+                            <td align="center">
+                                <a href="@Url.Action("Remove", "Cart", new { id = item.MaSP })"><img src="images/remove.png" alt="remove" /><br />Remove </a>
+                            </td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <td colspan="4" align="right"><strong>Tổng cộng:</strong></td>
+                        <td align="right">@Model.Sum(x => x.ThanhTien).ToString("N0") ₫</td>
+                        <td></td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" align="center">Giỏ hàng của bạn hiện đang trống.</td>
+                    </tr>
+                }
+            </table>
+
+            <div class="cleaner h20"></div>
+            <div class="cleaner h20"></div>
+            <div class="cleaner h20"></div>
+            <div class="right">
+                @{
+                    var userID = Context.Session.GetInt32("UserID");
+                    var username = Context.Session.GetString("Username");
+
+                    
+                }
+
+                @if (userID != null)
+                {
+                    <div style="margin-bottom: 10px;">
+                        <small>Xin chào: <strong>@username</strong></small>
+                    </div>
+                    <form method="post" action="@Url.Action("Checkout", "Cart")" style="display: inline;">
+                        <button type="submit" class="button"
+                                onclick="return confirm('Xác nhận thanh toán đơn hàng?')">
+                            Thanh toán ngay
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <div style="margin-bottom: 10px;">
+                        <small><em>Chưa đăng nhập</em></small>
+                    </div>
+                    <a href="@Url.Action("Login", "Account")" class="button" style="background: #dc3545;">
+                        Thanh Toán
+                    </a>
+                }
+            </div>
+
+            <div class="cleaner h20"></div>
+            <div class="blank_box">
+                <a href="#"><img src="images/free_shipping.jpg" alt="Free Shipping" /></a>
+            </div>
+        </div>
+        <div class="cleaner"></div>
+    </div> <!-- END of main -->
+</div> <!-- END of main wrapper -->

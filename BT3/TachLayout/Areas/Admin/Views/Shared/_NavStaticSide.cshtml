@@ -1,0 +1,64 @@
+﻿<!-- Sidebar chính -->
+<div class="navbar-default sidebar" role="navigation">
+
+    <!-- Phần nội dung bên trong sidebar -->
+    <div class="sidebar-nav navbar-collapse">
+
+        <!-- Danh sách menu chính -->
+        <ul class="nav" id="side-menu">
+
+            <!-- Ô tìm kiếm trong sidebar -->
+            <li class="sidebar-search">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+                <!-- /input-group -->
+            </li>
+
+            <!-- Trang Quản Trị Website (mục đầu tiên) -->
+            <li>
+                <a asp-area="Admin" asp-controller="Admin" asp-action="Index">
+                    <i class="fa fa-home fa-fw me-1"></i> Trang Quản Trị Website
+                </a>
+            </li>
+
+            <!-- Mục: Cài đặt Web -->
+            <li>
+                <a asp-controller="WebSetting" asp-action="WebSetting">
+                    <i class="fa fa-cogs fa-fw me-1"></i> Cài đặt Web
+                </a>
+            </li>
+
+            <!-- Mục: Thêm sản phẩm -->
+            <li>
+                <a asp-area="Admin" asp-controller="Product" asp-action="Index">
+                    <i class="fa fa-plus-square fa-fw me-1"></i> Thêm sản phẩm
+                </a>
+            </li>
+
+            <!-- Mục: Quản lý đơn hàng -->
+            <li>
+                <a asp-area="Admin" asp-controller="Admin" asp-action="Donhang">
+                    <i class="fa fa-shopping-cart fa-fw me-1"></i> Quản lý đơn hàng
+                </a>
+            </li>
+
+            <!-- Mục: Về Trang Chính -->
+            <li>
+                <a asp-controller="Home" asp-action="Index">
+                    <i class="fa fa-arrow-left fa-fw me-1"></i> Về Trang Chính
+                </a>
+            </li>
+
+        </ul>
+        <!-- /ul.nav -->
+    </div>
+    <!-- /.sidebar-collapse -->
+
+</div>
+<!-- /.sidebar -->

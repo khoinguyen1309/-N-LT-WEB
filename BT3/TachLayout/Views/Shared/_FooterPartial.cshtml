@@ -1,0 +1,58 @@
+﻿@{
+    // 🔹 Lấy dữ liệu WebSetting từ ViewBag
+    var websetting = ViewBag.WebSetting as TachLayout.Models.WebSetting;
+}
+
+<!-- 🔹 Bắt đầu phần footer tổng -->
+<div id="templatemo_footer_wrapper">
+    <div id="templatemo_footer">
+
+        <!-- 🔹 Cột trái: logo, hình thanh toán -->
+        <div class="footer_left">
+            <a href="#">
+                <img src="images/1311260370_paypal-straight.png" alt="Paypal" />
+            </a>
+            <a href="#">
+                <img src="images/1311260374_mastercard-straight.png" alt="Master" />
+            </a>
+            <a href="#">
+                <img src="images/1311260374_visa-straight.png" alt="Visa" />
+            </a>
+
+            <!-- 🔹 Logo website -->
+             <div style="margin-top:10px;">
+                    <img src="@Model.Logo" alt="Logo Website" style="max-height:80px;" />
+            </div>
+        </div>
+
+         <!-- 🔹 Cột phải: liên kết, bản quyền, thông tin website -->
+        <div class="footer_right">
+
+            <!-- 🔹 Liên kết menu nhanh -->
+            <p>
+                <a href="index.html">Home</a> |
+                <a href="products.html">Products</a> |
+                <a href="about.html">About</a> |
+                <a href="faqs.html">FAQs</a> |
+                <a href="checkout.html">Checkout</a> |
+                <a href="contact.html">Contact</a>
+            </p>
+
+             <!-- 🔹 Dòng bản quyền -->
+            <p>
+                Copyright © @DateTime.Now.Year
+                <a href="#">@Model.TenSite</a>
+            </p>
+
+            <!-- 🔹 Thêm các dòng hiển thị WebSetting -->
+            <div style="margin-top:10px; font-size:14px; color:#ddd;">
+                <p><strong>Địa chỉ:</strong> @Model.DiaChi</p>
+                <p><strong>Email:</strong> @Model.Email</p>
+                <p><strong>Hotline:</strong> @Model.HotLine</p>
+            </div>
+        </div>
+
+         <!-- 🔹 Dọn layout (clear float) -->
+        <div class="cleaner"></div>
+    </div>
+</div>
