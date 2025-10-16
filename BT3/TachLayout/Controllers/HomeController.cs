@@ -111,5 +111,11 @@ namespace TachLayout.Controllers
             });
         }
 
+        public IActionResult TestGit()
+        {
+            ViewData["Title"] = "TestGit";
+            return View();
+        }
+
     }
 }
