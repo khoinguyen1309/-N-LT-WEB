@@ -117,5 +117,10 @@ namespace TachLayout.Controllers
             return View();
         }
 
+        public IActionResult ThongTin()
+        {
+            ViewData["Title"] = "ThongTin";
+            return View();
+        }
     }
 }
